@@ -15,5 +15,11 @@ pipeline {
                 }
             }
         }
+     
+        stage('Deploy to staging'){
+            steps {
+               build job: 'deploy-to-staging'
+            }
+        }
     }
 }
