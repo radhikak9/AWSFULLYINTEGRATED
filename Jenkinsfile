@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
+                    archiveArtifacts artifacts: '/Users/radhu/AWSFULLYINTEGRATED/webapp/target/*.war'
                 }
             }
         }
