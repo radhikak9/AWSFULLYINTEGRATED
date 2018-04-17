@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '/Users/radhu/AWSFULLYINTEGRATED/webapp/target/*.war'
+                    archiveArtifacts artifacts: '/Users/Shared/Jenkins/Home/workspace/FullyAuomated/target/*.war'
                 }
             }
         }
@@ -28,13 +28,13 @@ pipeline {
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /Users/radhu/AWSFULLYINTEGRATED/webapp/target/*.war ec2-user@52.201.56.27:/var/lib/tomcat8/webapps"
+                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /Users/Shared/Jenkins/Home/workspace/FullyAuomated/target/*.war ec2-user@52.201.56.27:/var/lib/tomcat8/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /Users/radhu/AWSFULLYINTEGRATED/webapp/target/*.war ec2-user@34.207.147.101:/var/lib/tomcat8/webapps"
+                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /Users/Shared/Jenkins/Home/workspace/FullyAuomated/target/*.war ec2-user@34.207.147.101:/var/lib/tomcat8/webapps"
                     }
                 }
             }
