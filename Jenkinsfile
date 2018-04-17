@@ -1,9 +1,14 @@
 pipeline {
     agent any
-    tools {
-    maven 'localMaven'
-  }
-    stages{
+    parameters { 
+         string(name: 'tomcat_dev', defaultValue: '35.166.210.154', description: 'Staging Server')
+         string(name: 'tomcat_prod', defaultValue: '34.209.233.6', description: 'Production Server')
+    } 
+
+    triggers {
+         pollSCM('* * * * *') // Polling Source Control
+     }
+     stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
@@ -15,29 +20,25 @@ pipeline {
                 }
             }
         }
-     
-        stage('Deploy to staging'){
-            steps {
-               build job: 'deploy-to-staging'
-            }
-        }
-         stage ('Deploy to Production'){
-            steps{
-                timeout(time:5, unit:'DAYS'){
-                    input message:'Approve PRODUCTION Deployment?'
+
+        stage ('Deployments'){
+            parallel{
+                stage ('Deploy to Staging'){
+                    steps {
+                        sh "scp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem **/target/*.war ec2-user@52.201.56.27:/var/lib/tomcat8/webapps"
+                    }
                 }
 
-                build job: 'Deploy-to-Production'
-            }
-            post {
-                success {
-                    echo 'Code deployed to Production.'
-                }
-
-                failure {
-                    echo ' Deployment failed.'
+                stage ("Deploy to Production"){
+                    steps {
+                        sh "scp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem **/target/*.war ec2-user@34.207.147.101:/var/lib/tomcat8/webapps"
+                    }
                 }
             }
         }
     }
+}
+
+    
+    
 }
