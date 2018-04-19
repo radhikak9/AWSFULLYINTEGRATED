@@ -4,8 +4,8 @@ pipeline {
     maven 'localMaven'
   }
     parameters { 
-         string(name: 'tomcat_dev', defaultValue: 'localhost:8090', description: 'Staging Server')
-         string(name: 'tomcat_prod', defaultValue: 'localhost:9090', description: 'Production Server')
+         string(name: 'tomcat_dev', defaultValue: 'localhost', description: 'Staging Server')
+         string(name: 'tomcat_prod', defaultValue: 'localhost', description: 'Production Server')
     } 
 
     triggers {
@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '/Users/Shared/Jenkins/Home/workspace/FullyAuomated/webapp/*.war'
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
         }
