@@ -28,7 +28,7 @@ pipeline {
             parallel{
                 stage ('Deploy-to-Staging'){
                     steps {
-                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /var/Users/Shared/Jenkins/Home/workspace/FullyAuomated/webapp/target/*.war ec2-user@52.201.56.27:/var/lib/tomcat8/webapps"
+                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /var/Users/radhu/awsfullyintegrated/webapp/target/*.war ec2-user@52.201.56.27:/var/lib/tomcat8/webapps"
                         
                     }
                     
@@ -36,7 +36,7 @@ pipeline {
 
                 stage ("Deploy-to-Production"){
                     steps {
-                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /var/Users/Shared/Jenkins/Home/workspace/FullyAuomated/webapp/target/*.war ec2-user@34.207.147.101:/var/lib/tomcat8/webapps"
+                        sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem /var/Users/radhu/awsfullyintegrated/webapp/target/*.war ec2-user@34.207.147.101:/var/lib/tomcat8/webapps"
                         
                     }
                         
