@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '/Users/Shared/Jenkins/Home/workspace/FullyAuomated/webapp//*.war'
+                    archiveArtifacts artifacts: '/Users/Shared/Jenkins/Home/workspace/FullyAuomated/webapp/*.war'
                 }
             }
         }
