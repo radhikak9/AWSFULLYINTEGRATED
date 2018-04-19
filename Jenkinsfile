@@ -26,13 +26,13 @@ pipeline {
 
         stage ('Deployments'){
             parallel{
-                stage ('Deploy to Staging'){
+                stage ('deploy-to-staging'){
                     steps {
                         sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem **/target/*.war ec2-user@52.201.56.27:/var/lib/tomcat8/webapps"
                     }
                 }
 
-                stage ("Deploy to Production"){
+                stage ("deploy-to-production"){
                     steps {
                         sh "cp -i /Users/radhu/downloads/ssh/MyEC2Keypair.pem **/target/*.war ec2-user@34.207.147.101:/var/lib/tomcat8/webapps"
                     }
